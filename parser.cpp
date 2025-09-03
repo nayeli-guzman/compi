@@ -65,9 +65,10 @@ Exp* Parser::parseProgram() {
     return ast;
 }
 
-
+/*
 Exp* Parser::parseP() {
     Exp* l = parseE();
+
     while (match(Token::PLUS) || match(Token::MINUS)) {
         BinaryOp op;
         if (previous->type == Token::PLUS){
@@ -79,9 +80,62 @@ Exp* Parser::parseP() {
         Exp* r = parseE();
         l = new BinaryExp(l, r, op);
     }
+    
+    return l;
+}
+*/
+
+Exp* Parser::parseP() {
+    Exp* l = parseA();
     return l;
 }
 
+Exp* Parser::parseA() {
+    Exp* l = parseE();
+
+    if(match(Token::LT)) {
+        BinaryOp op = LT_OP;
+        Exp* r = parseB();
+        l = new BinaryExp(l, r, op);
+    }
+
+    return l;
+}
+
+Exp* Parser::parseB() {
+    Exp* l = parseC();
+
+    while (match(Token::PLUS) || match(Token::MINUS)) {
+        BinaryOp op;
+        if (previous->type == Token::PLUS){
+            op = PLUS_OP;
+        }
+        else{
+            op = MINUS_OP;
+        }
+        Exp* r = parseC();
+        l = new BinaryExp(l, r, op);
+    }
+    
+
+    return l;
+}
+
+Exp* Parser::parseC() {
+    Exp* l = parseT();
+    while (match(Token::MUL) || match(Token::DIV)) {
+        BinaryOp op;
+        if (previous->type == Token::MUL){
+            op = MUL_OP;
+        }
+        else{
+            op = DIV_OP;
+        }
+        Exp* r = parseT();
+        l = new BinaryExp(l, r, op);
+    }
+    return l;
+}
 
 
 Exp* Parser::parseE() {
@@ -118,18 +172,41 @@ Exp* Parser::parseF() {
     } 
     else if (match(Token::LPAREN))
     {
-        e = parseP();
+        e = parseA();
         match(Token::RPAREN);
         return e;
     }
     else if (match(Token::SQRT))
     {   
         match(Token::LPAREN);
-        e = parseP();
+        e = parseA();
         match(Token::RPAREN);
         return new SqrtExp(e);
+    }
+    else if (match(Token::MIN))
+    {   
+        match(Token::LPAREN);
+        e = parseA();
+        match(Token::COMA);
+        f = parseA();
+        match(Token::RPAREN);
+        return new Min(e);
     }
     else {
         throw runtime_error("Error sintáctico");
     }
 }
+
+
+/*
+
+    Exp* parseP();                   // Regla gramatical P
+    Exp* parseA();                   // Regla gramatical A
+    Exp* parseB();
+    Exp* parseR();
+    Exp* parseC();
+    Exp* parseE();                   // Regla gramatical E
+    Exp* parseT();                   // Regla gramatical T
+    Exp* parseF(); 
+
+*/

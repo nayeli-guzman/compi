@@ -1,0 +1,15 @@
+Iniciando Scanner para archivo: inputs/input10.txt
+
+TOKEN(ID, "if")
+TOKEN(LPAREN, "(")
+TOKEN(LPAREN, "(")
+TOKEN(MINUS, "-")
+TOKEN(NUM, "2")
+TOKEN(RPAREN, ")")
+TOKEN(PLUS, "+")
+TOKEN(NUM, "2")
+TOKEN(ERR, "<")
+Caracter invalido
+
+Scanner no exitoso
+

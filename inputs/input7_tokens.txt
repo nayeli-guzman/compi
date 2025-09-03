@@ -1,0 +1,11 @@
+Iniciando Scanner para archivo: inputs/input7.txt
+
+TOKEN(SQRT, "sqrt")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "25")
+TOKEN(RPAREN, ")")
+TOKEN(ERR, "<")
+Caracter invalido
+
+Scanner no exitoso
+

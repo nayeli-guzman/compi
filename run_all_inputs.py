@@ -17,7 +17,7 @@ print("Compilación exitosa")
 
 # Ejecutar
 input_dir = "inputs"
-for i in range(1, 12): 
+for i in range(1, 11): 
     filename = f"input{i}.txt"
     filepath = os.path.join(input_dir, filename)
     if os.path.isfile(filepath):

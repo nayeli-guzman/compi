@@ -1,0 +1,10 @@
+Iniciando Scanner para archivo: inputs/input3.txt
+
+TOKEN(ID, "max")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "2")
+TOKEN(ERR, ",")
+Caracter invalido
+
+Scanner no exitoso
+

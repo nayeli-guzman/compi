@@ -195,7 +195,9 @@ Exp* Parser::parseF() {
     else if (match(Token::MINUS))
     {
         e = parseF();
-        return new BinaryExp(new NumberExp(0), e, MINUS_OP);
+        return new NumberExp(0 - 
+            dynamic_cast<NumberExp*>(e)->value // se debe downcastear a numexp pq e es un exp
+        );
     }
     else {
         throw runtime_error("Error sintáctico");

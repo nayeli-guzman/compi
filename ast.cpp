@@ -67,3 +67,5 @@ string Exp::binopToChar(BinaryOp op) {
     value->toDot(out, id);
     out << "  node" << myId << " -> node" << childId << ";\n";
     }
+
+    //hola

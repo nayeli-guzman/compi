@@ -1,10 +1,23 @@
 Iniciando Scanner para archivo: inputs/input9.txt
 
-TOKEN(ID, "if")
+TOKEN(IF, "if")
 TOKEN(LPAREN, "(")
 TOKEN(NUM, "3")
-TOKEN(ERR, "<")
-Caracter invalido
+TOKEN(LT, "<")
+TOKEN(NUM, "4")
+TOKEN(COMA, ",")
+TOKEN(NUM, "10")
+TOKEN(COMA, ",")
+TOKEN(NUM, "20")
+TOKEN(RPAREN, ")")
+TOKEN(PLUS, "+")
+TOKEN(LPAREN, "(")
+TOKEN(MINUS, "-")
+TOKEN(NUM, "3")
+TOKEN(RPAREN, ")")
+TOKEN(LT, "<")
+TOKEN(NUM, "5")
+TOKEN(END)
 
-Scanner no exitoso
+Scanner exitoso
 

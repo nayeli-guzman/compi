@@ -13,6 +13,9 @@ string Exp::binopToChar(BinaryOp op) {
         case MUL_OP:   return "*";
         case DIV_OP:   return "/";
         case POW_OP:   return "**";
+        case MIN_OP:   return "min";
+        case MAX_OP:   return "max";
+        case LT_OP:    return "<";
         default:       return "?";
     }
 }
@@ -68,4 +71,32 @@ string Exp::binopToChar(BinaryOp op) {
     out << "  node" << myId << " -> node" << childId << ";\n";
     }
 
-    //holaa
+    // ------------------ IfExp ------------------
+    IfExp::IfExp(Exp* cond, Exp* thenBr, Exp* elseBr)
+        : condition(cond), thenBranch(thenBr), elseBranch(elseBr) {} 
+    IfExp::~IfExp() {
+        delete condition;
+        delete thenBranch;
+        delete elseBranch;
+    }
+
+    void IfExp::toDot(ostream& out, int& id) const {
+        int myId = id++;
+        out << "  node" << myId << " [label=\"if\"];\n";
+
+        if (condition) {
+            int condId = id;
+            condition->toDot(out, id);
+            out << "  node" << myId << " -> node" << condId << " [label=\"cond\"];\n";
+        }
+        if (thenBranch) {
+            int thenId = id;
+            thenBranch->toDot(out, id);
+            out << "  node" << myId << " -> node" << thenId << " [label=\"then\"];\n";
+        }
+        if (elseBranch) {
+            int elseId = id;
+            elseBranch->toDot(out, id);
+            out << "  node" << myId << " -> node" << elseId << " [label=\"else\"];\n";
+        }
+    }

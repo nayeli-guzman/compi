@@ -1,12 +1,18 @@
 Iniciando Scanner para archivo: inputs/input4.txt
 
-TOKEN(ID, "min")
+TOKEN(MIN, "min")
 TOKEN(LPAREN, "(")
 TOKEN(NUM, "3")
 TOKEN(PLUS, "+")
 TOKEN(NUM, "2")
-TOKEN(ERR, ",")
-Caracter invalido
+TOKEN(COMA, ",")
+TOKEN(NUM, "5")
+TOKEN(PLUS, "+")
+TOKEN(NUM, "2")
+TOKEN(RPAREN, ")")
+TOKEN(PLUS, "+")
+TOKEN(NUM, "2")
+TOKEN(END)
 
-Scanner no exitoso
+Scanner exitoso
 

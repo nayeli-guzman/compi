@@ -14,7 +14,10 @@ enum BinaryOp {
     MINUS_OP, 
     MUL_OP, 
     DIV_OP,
-    POW_OP
+    POW_OP,
+    MIN_OP,
+    MAX_OP,
+    LT_OP
 };
 
 // Clase abstracta Exp
@@ -57,6 +60,18 @@ public:
 
     SqrtExp(Exp* v);
     ~SqrtExp();
+
+    void toDot(std::ostream& out, int& id) const override; 
+};
+
+class IfExp : public Exp {
+public:
+    Exp* condition;
+    Exp* thenBranch;
+    Exp* elseBranch;
+
+    IfExp(Exp* cond, Exp* thenBr, Exp* elseBr);
+    ~IfExp();
 
     void toDot(std::ostream& out, int& id) const override; 
 };

@@ -4,8 +4,9 @@ TOKEN(SQRT, "sqrt")
 TOKEN(LPAREN, "(")
 TOKEN(NUM, "25")
 TOKEN(RPAREN, ")")
-TOKEN(ERR, "<")
-Caracter invalido
+TOKEN(LT, "<")
+TOKEN(NUM, "5")
+TOKEN(END)
 
-Scanner no exitoso
+Scanner exitoso
 

@@ -1,10 +1,14 @@
 Iniciando Scanner para archivo: inputs/input8.txt
 
-TOKEN(ID, "max")
+TOKEN(MAX, "max")
 TOKEN(LPAREN, "(")
 TOKEN(NUM, "2")
-TOKEN(ERR, ",")
-Caracter invalido
+TOKEN(COMA, ",")
+TOKEN(NUM, "5")
+TOKEN(RPAREN, ")")
+TOKEN(LT, "<")
+TOKEN(NUM, "2")
+TOKEN(END)
 
-Scanner no exitoso
+Scanner exitoso
 

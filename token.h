@@ -21,6 +21,11 @@ public:
         NUM,     // Número
         ERR,     // Error
         ID,      // ID
+        LT,      // <
+        IF,      // if
+        MAX,     // max
+        MIN,     // min
+        COMA,    // ,
         END      // Fin de entrada
     };
 

@@ -1,13 +1,32 @@
 Iniciando Scanner para archivo: inputs/input5.txt
 
-TOKEN(ID, "if")
+TOKEN(IF, "if")
 TOKEN(LPAREN, "(")
 TOKEN(LPAREN, "(")
 TOKEN(MINUS, "-")
 TOKEN(NUM, "2")
 TOKEN(RPAREN, ")")
-TOKEN(ERR, "<")
-Caracter invalido
+TOKEN(LT, "<")
+TOKEN(LPAREN, "(")
+TOKEN(MINUS, "-")
+TOKEN(NUM, "4")
+TOKEN(RPAREN, ")")
+TOKEN(COMA, ",")
+TOKEN(MAX, "max")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "3")
+TOKEN(COMA, ",")
+TOKEN(NUM, "10")
+TOKEN(RPAREN, ")")
+TOKEN(COMA, ",")
+TOKEN(MIN, "min")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "4")
+TOKEN(COMA, ",")
+TOKEN(NUM, "10")
+TOKEN(RPAREN, ")")
+TOKEN(RPAREN, ")")
+TOKEN(END)
 
-Scanner no exitoso
+Scanner exitoso
 

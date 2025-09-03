@@ -57,7 +57,7 @@ bool Parser::isAtEnd() {
 // =============================
 
 Exp* Parser::parseProgram() {
-    Exp* ast = parseP();
+    Exp* ast = parseA();
     if (!isAtEnd()) {
         throw runtime_error("Error sintáctico");
     }
@@ -188,9 +188,34 @@ Exp* Parser::parseF() {
         match(Token::LPAREN);
         e = parseA();
         match(Token::COMA);
-        f = parseA();
+        Exp* f = parseA();
         match(Token::RPAREN);
-        return new Min(e);
+        return new BinaryExp(e, f, MIN_OP);
+    }
+    else if (match(Token::MAX))
+    {   
+        match(Token::LPAREN);
+        e = parseA();
+        match(Token::COMA);
+        Exp* f = parseA();
+        match(Token::RPAREN);
+        return new BinaryExp(e, f, MAX_OP);
+    }
+    else if (match(Token::IF))
+    {   
+        match(Token::LPAREN);
+        e = parseA();
+        match(Token::COMA);
+        Exp* f = parseA();
+        match(Token::COMA);
+        Exp* g = parseA();
+        match(Token::RPAREN);
+        return new IfExp(e, f, g);
+    }
+    else if (match(Token::MINUS))
+    {
+        e = parseF();
+        return new BinaryExp(new NumberExp(0), e, MINUS_OP);
     }
     else {
         throw runtime_error("Error sintáctico");

@@ -57,7 +57,7 @@ bool Parser::isAtEnd() {
 // =============================
 
 Exp* Parser::parseProgram() {
-    Exp* ast = parseA();
+    Exp* ast = parseP();
     if (!isAtEnd()) {
         throw runtime_error("Error sintáctico");
     }
@@ -65,33 +65,13 @@ Exp* Parser::parseProgram() {
     return ast;
 }
 
-/*
-Exp* Parser::parseP() {
-    Exp* l = parseE();
-
-    while (match(Token::PLUS) || match(Token::MINUS)) {
-        BinaryOp op;
-        if (previous->type == Token::PLUS){
-            op = PLUS_OP;
-        }
-        else{
-            op = MINUS_OP;
-        }
-        Exp* r = parseE();
-        l = new BinaryExp(l, r, op);
-    }
-    
-    return l;
-}
-*/
-
 Exp* Parser::parseP() {
     Exp* l = parseA();
     return l;
 }
 
 Exp* Parser::parseA() {
-    Exp* l = parseE();
+    Exp* l = parseB();
 
     if(match(Token::LT)) {
         BinaryOp op = LT_OP;

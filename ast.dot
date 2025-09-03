@@ -1,3 +1,21 @@
 digraph AST {
-    empty [label="AST vacío"];
+  node0 [label="if"];
+  node1 [label="<"];
+  node2 [label="+"];
+  node3 [label="-"];
+  node4 [label="0"];
+  node3 -> node4;
+  node5 [label="2"];
+  node3 -> node5;
+  node2 -> node3;
+  node6 [label="2"];
+  node2 -> node6;
+  node1 -> node2;
+  node7 [label="0"];
+  node1 -> node7;
+  node0 -> node1 [label="cond"];
+  node8 [label="5"];
+  node0 -> node8 [label="then"];
+  node9 [label="3"];
+  node0 -> node9 [label="else"];
 }

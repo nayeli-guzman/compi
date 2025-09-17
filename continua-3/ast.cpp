@@ -56,8 +56,9 @@ MinExp::~MinExp(){}
 Program::Program(){}
 Program::~Program(){}
 Stm::~Stm(){}
-PrintStm::PrintStm(Exp* e1){
+PrintStm::PrintStm(Exp* e1, vector<Exp*> v){
     e=e1;
+    evector = v;
 }
 PrintStm::~PrintStm(){}
 AssignStm::AssignStm(string id1, Exp* rhs1){

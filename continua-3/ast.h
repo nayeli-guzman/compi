@@ -103,7 +103,7 @@ public:
     Exp* e;
     vector<Exp*> evector;
     int accept(Visitor* visitor);
-    PrintStm(Exp*);
+    PrintStm(Exp*, vector<Exp*>);
     ~PrintStm();
 };
 

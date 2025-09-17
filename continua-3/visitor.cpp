@@ -80,7 +80,10 @@ int PrintVisitor::visit(RandExp* exp) {
 
 int PrintVisitor::visit(MinExp* exp) {
     cout << "min(";
-    exp->valuelist->accept(this);
+    for (auto e: exp->valuelist)
+    {
+        e->accept(this);
+    }
     cout <<  ")";
     return 0;
 }
@@ -147,13 +150,18 @@ int EVALVisitor::visit(RandExp* exp) {
     return random_number;
 }
 
-int EVALVisitor::visit(SqrtExp* exp) {
-    return floor(sqrt( exp->value->accept(this)));
-}
-
 
 int EVALVisitor::visit(MinExp* exp) {
-    return std::min(exp->valuelist->accept(this));
+
+    int mini = INT32_MAX;
+
+    for(auto e: exp->valuelist)
+    {
+        int num = e->accept(this);
+        mini = min(mini, num);
+    }
+
+    return mini;
 }
 
 void EVALVisitor::interprete(Program* programa){

@@ -1,1 +1,1 @@
-b = rand(1, 10); print('Número aleatorio:', b)
+b = rand(1, 10); print('Numero aleatorio:', b)

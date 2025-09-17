@@ -56,10 +56,27 @@ Token* Scanner::nextToken() {
         if (lexema=="sqrt") return new Token(Token::SQRT, input, first, current - first);
         else if (lexema=="print") return new Token(Token::PRINT, input, first, current - first);
         else if (lexema=="min") return new Token(Token::MIN, input, first, current - first);
-        else if (lexema=="string") return new Token(Token::STRING, input, first, current - first);
         else if (lexema=="rand") return new Token(Token::RAND, input, first, current - first);
         else return new Token(Token::ID, input, first, current - first);
     }
+    // String
+    else if (c == '\'') {
+        current++;
+        int start = current;
+
+        while (current < input.length() && input[current] != '\'') {
+            current++;
+        }
+
+        if (current >= input.length()) {
+            return new Token(Token::ERR, input, start, current - start);
+        }
+
+        Token* t = new Token(Token::STRING, input, start, current - start);
+        current++; // saltar la comilla final
+        return t;
+    }
+
     // Operadores
     else if (strchr("+/-*();=,", c)) {
         switch (c) {

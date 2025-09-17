@@ -1,0 +1,9 @@
+=== STDOUT ===
+Parseo exitoso
+Codigo:
+x = 5
+print(x)
+
+Interprete:5
+
+=== STDERR ===

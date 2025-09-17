@@ -1,0 +1,16 @@
+Scanner
+
+TOKEN(ID, "y")
+TOKEN(ASSIGN, "=")
+TOKEN(SQRT, "sqrt")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "16")
+TOKEN(RPAREN, ")")
+TOKEN(SEMICOL, ";")
+TOKEN(PRINT, "print")
+TOKEN(LPAREN, "(")
+TOKEN(ERR, "'")
+Caracter invalido
+
+Scanner no exitoso
+

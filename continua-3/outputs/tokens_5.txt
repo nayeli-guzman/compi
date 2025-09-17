@@ -1,0 +1,18 @@
+Scanner
+
+TOKEN(ID, "b")
+TOKEN(ASSIGN, "=")
+TOKEN(RAND, "rand")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "1")
+TOKEN(COMA, ",")
+TOKEN(NUM, "10")
+TOKEN(RPAREN, ")")
+TOKEN(SEMICOL, ";")
+TOKEN(PRINT, "print")
+TOKEN(LPAREN, "(")
+TOKEN(ERR, "'")
+Caracter invalido
+
+Scanner no exitoso
+

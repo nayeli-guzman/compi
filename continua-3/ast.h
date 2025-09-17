@@ -80,7 +80,7 @@ class MinExp : public Exp {
 public:
     vector<Exp*> valuelist;
     int accept(Visitor* visitor);
-    MinExp(Exp* v);
+    MinExp(vector<Exp*> valuelist);
     ~MinExp();
 };
 

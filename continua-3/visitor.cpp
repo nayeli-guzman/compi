@@ -140,9 +140,11 @@ int EVALVisitor::visit(RandExp* exp) {
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::default_random_engine generator(seed);
 
-    std::uniform_int_distribution<int> distribution(exp->value1, exp->value2);
+    std::uniform_int_distribution<int> distribution(exp->value1->accept(this), exp->value2->accept(this));
 
     int random_number = distribution(generator);
+
+    return random_number;
 }
 
 int EVALVisitor::visit(SqrtExp* exp) {
@@ -179,7 +181,6 @@ int EVALVisitor::visit(AssignStm* stm) {
 int EVALVisitor::visit(IdExp* exp) {
     return memoria[exp->value];
 }
-
 
 int PrintVisitor::visit(IdExp* exp) {
     cout << exp->value;

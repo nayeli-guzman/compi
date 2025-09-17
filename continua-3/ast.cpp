@@ -48,9 +48,9 @@ RandExp::RandExp(Exp* v1, Exp* v2) : value1(v1), value2(v2) {}
 RandExp::~RandExp() {}
 
 // ------------------ MinExp ------------------
-MinExp::MinExp(vector<Exp*> v) : valuelist(v) {}
+MinExp::MinExp(vector<Exp*> valuelist) {}
 
-MinExp::~MinExp() {}
+MinExp::~MinExp(){}
 
 ///////////////////////////////////////////////
 Program::Program(){}

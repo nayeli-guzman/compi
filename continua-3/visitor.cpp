@@ -1,6 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <random>
+#include <chrono>
+#include <algorithm>
+#include <vector>
 #include "ast.h"
 #include "visitor.h"
 
@@ -21,6 +25,14 @@ int NumberExp::accept(Visitor* visitor) {
 }
 
 int SqrtExp::accept(Visitor* visitor) {
+    return visitor->visit(this);
+}
+
+int RandExp::accept(Visitor* visitor) {
+    return visitor->visit(this);
+}
+
+int MinExp::accept(Visitor* visitor) {
     return visitor->visit(this);
 }
 
@@ -57,6 +69,21 @@ int PrintVisitor::visit(SqrtExp* exp) {
     return 0;
 }
 
+int PrintVisitor::visit(RandExp* exp) {
+    cout << "rand(";
+    exp->value1->accept(this);
+    cout << ", ";
+    exp->value2->accept(this);
+    cout <<  ")";
+    return 0;
+}
+
+int PrintVisitor::visit(MinExp* exp) {
+    cout << "min(";
+    exp->valuelist->accept(this);
+    cout <<  ")";
+    return 0;
+}
 
 void PrintVisitor::imprimir(Program* programa){
     if (programa)
@@ -109,6 +136,23 @@ int EVALVisitor::visit(SqrtExp* exp) {
     return floor(sqrt( exp->value->accept(this)));
 }
 
+int EVALVisitor::visit(RandExp* exp) {
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine generator(seed);
+
+    std::uniform_int_distribution<int> distribution(exp->value1, exp->value2);
+
+    int random_number = distribution(generator);
+}
+
+int EVALVisitor::visit(SqrtExp* exp) {
+    return floor(sqrt( exp->value->accept(this)));
+}
+
+
+int EVALVisitor::visit(MinExp* exp) {
+    return std::min(exp->valuelist->accept(this));
+}
 
 void EVALVisitor::interprete(Program* programa){
     if (programa)

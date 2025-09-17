@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include <list>
+#include <vector>
 #include <ostream>
 
 using namespace std;
@@ -70,14 +71,14 @@ public:
     Exp* value1;
     Exp* value2;
     int accept(Visitor* visitor);
-    RandExp(Exp* v);
+    RandExp(Exp* value1, Exp* value2);
     ~RandExp();
 };
 
 // Min
 class MinExp : public Exp {
 public:
-    list<Exp*> valuelist;
+    vector<Exp*> valuelist;
     int accept(Visitor* visitor);
     MinExp(Exp* v);
     ~MinExp();
@@ -100,6 +101,7 @@ public:
 class PrintStm: public Stm{
 public:
     Exp* e;
+    vector<Exp*> evector;
     int accept(Visitor* visitor);
     PrintStm(Exp*);
     ~PrintStm();

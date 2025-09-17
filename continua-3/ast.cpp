@@ -42,6 +42,16 @@ SqrtExp::SqrtExp(Exp* v) : value(v) {}
 
 SqrtExp::~SqrtExp() {}
 
+// ------------------ RandExp ------------------
+RandExp::RandExp(Exp* v1, Exp* v2) : value1(v1), value2(v2) {}
+
+RandExp::~RandExp() {}
+
+// ------------------ MinExp ------------------
+MinExp::MinExp(vector<Exp*> v) : valuelist(v) {}
+
+MinExp::~MinExp() {}
+
 ///////////////////////////////////////////////
 Program::Program(){}
 Program::~Program(){}

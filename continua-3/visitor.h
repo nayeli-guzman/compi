@@ -16,6 +16,8 @@ public:
     virtual int visit(NumberExp* exp) = 0;
     virtual int visit(IdExp* exp) = 0;
     virtual int visit(SqrtExp* exp) = 0;
+    virtual int visit(RandExp* exp) = 0;
+    virtual int visit(MinExp* exp) = 0;
     virtual int visit(Program* exp) = 0;
     virtual int visit(PrintStm* exp) = 0;
     virtual int visit(AssignStm* exp) = 0;
@@ -27,6 +29,8 @@ public:
     int visit(BinaryExp* exp) override;
     int visit(NumberExp* exp) override;
     int visit(SqrtExp* exp) override;
+    int visit(RandExp* exp) override;
+    int visit(MinExp* exp) override;
     int visit(PrintStm* exp) override;
     int visit(AssignStm* exp) override;
     int visit(Program* exp) override;
@@ -39,6 +43,8 @@ public:
     int visit(BinaryExp* exp) override;
     int visit(NumberExp* exp) override;
     int visit(SqrtExp* exp) override;
+    int visit(RandExp* exp) override;
+    int visit(MinExp* exp) override;
     int visit(PrintStm* exp) override;
     int visit(IdExp* exp) override;
     int visit(AssignStm* exp) override;

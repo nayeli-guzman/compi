@@ -1,9 +1,11 @@
 #include <iostream>
 #include <stdexcept>
+#include <vector>
 #include "token.h"
 #include "scanner.h"
 #include "ast.h"
 #include "parser.h"
+
 
 using namespace std;
 
@@ -70,15 +72,22 @@ Program* Parser::parseProgram() {
     return programa;
 }
 
+//not yet
 Stm* Parser::parseStm() {
     Stm* stm;
     Exp* e;
     string nombre;
     if(match(Token::PRINT)) {
         match(Token::LPAREN);
-        e = parseCE();
+        e = printArg();
+        vector<Exp*> list_prints;
+        while(match(Token::COMA))
+        {
+            list_prints.push_back(printArg());
+        }
+
         match(Token::RPAREN);
-        return new PrintStm(e);
+        return new PrintStm(e, list_prints);
     }
     else if(match(Token::ID)) {
         nombre = previous->text;
@@ -89,6 +98,7 @@ Stm* Parser::parseStm() {
     return stm;
 }
 
+//done
 Exp* Parser::parseCE() {
     Exp* l = parseE();
     while (match(Token::PLUS) || match(Token::MINUS)) {
@@ -105,8 +115,7 @@ Exp* Parser::parseCE() {
     return l;
 }
 
-
-
+//done
 Exp* Parser::parseE() {
     Exp* l = parseT();
     while (match(Token::MUL) || match(Token::DIV)) {
@@ -123,7 +132,7 @@ Exp* Parser::parseE() {
     return l;
 }
 
-
+// done
 Exp* Parser::parseT() {
     Exp* l = parseF();
     if (match(Token::POW)) {
@@ -156,7 +165,44 @@ Exp* Parser::parseF() {
     {
         return new IdExp(previous->text);
     }
+    else if (match(Token::MIN))
+    {
+        match(Token::LPAREN);
+        e = parseCE();
+        vector<Exp*> list_nums;
+        while (match(Token::COMA))
+        {
+            list_nums.push_back(parseCE());
+        }
+        match(Token::RPAREN);
+        return new MinExp(list_nums);
+    }
+    else if (match(Token::RAND))
+    {
+        match(Token::LPAREN);
+        e = parseCE();
+        match(Token::COMA);
+        Exp* l = parseCE();
+        match(Token::RPAREN);
+        return new RandExp(e, l);
+    }
     else {
         throw runtime_error("Error sintáctico");
     }
+}
+
+Exp* Parser::printArg() {
+    Exp* e; 
+    if (match(Token::ID))
+    {
+        return new IdExp(previous->text);
+    } else {
+        e = parseCE();
+    }
+        return e;
+
+
+    //else {
+    //    throw runtime_error("Error sintáctico");
+    //}
 }

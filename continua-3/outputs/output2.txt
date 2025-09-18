@@ -1,4 +1,10 @@
 === STDOUT ===
+Parseo exitoso
+Codigo:
+z = 3 + 5 * 2
+print('z es', z)
+
+Interprete:z es 16
+
 
 === STDERR ===
-Error al parsear: Error sintáctico

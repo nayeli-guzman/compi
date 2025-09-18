@@ -168,15 +168,17 @@ Exp* Parser::parseF() {
     else if (match(Token::MIN))
     {
         match(Token::LPAREN);
-        e = parseCE();
+        Exp* first = parseCE();           // 1er argumento
         vector<Exp*> list_nums;
-        while (match(Token::COMA))
-        {
-            list_nums.push_back(parseCE());
+        list_nums.push_back(first);       
+
+        while (match(Token::COMA)) {
+            list_nums.push_back(parseCE());  // resto de argumentos
         }
         match(Token::RPAREN);
         return new MinExp(list_nums);
     }
+
     else if (match(Token::RAND))
     {
         match(Token::LPAREN);
@@ -185,6 +187,9 @@ Exp* Parser::parseF() {
         Exp* l = parseCE();
         match(Token::RPAREN);
         return new RandExp(e, l);
+    }
+    else if (match(Token::STRING)) {            
+        return new StringExp(previous->text);
     }
     else {
         throw runtime_error("Error sintáctico");

@@ -84,6 +84,14 @@ public:
     ~MinExp();
 };
 
+class StringExp : public Exp {
+public:
+    string value;
+    int accept(Visitor* visitor);
+    StringExp(string v);
+    ~StringExp();
+};
+
 class Stm{
 public:
     virtual int  accept(Visitor* visitor) = 0;

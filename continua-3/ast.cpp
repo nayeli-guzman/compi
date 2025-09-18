@@ -2,6 +2,7 @@
 
 #include <complex.h>
 #include <iostream>
+#include "visitor.h"
 
 using namespace std;
 
@@ -48,9 +49,16 @@ RandExp::RandExp(Exp* v1, Exp* v2) : value1(v1), value2(v2) {}
 RandExp::~RandExp() {}
 
 // ------------------ MinExp ------------------
-MinExp::MinExp(vector<Exp*> valuelist) {}
+MinExp::MinExp(vector<Exp*> valuelist)
+    : valuelist(std::move(valuelist)) {}  
 
-MinExp::~MinExp(){}
+MinExp::~MinExp() {}
+
+// ------------------ StringExp ------------------
+StringExp::StringExp(string v) : value(v) {}
+StringExp::~StringExp() {}
+int StringExp::accept(Visitor* visitor) { return visitor->visit(this); }
+
 
 ///////////////////////////////////////////////
 Program::Program(){}

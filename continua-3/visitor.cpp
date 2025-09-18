@@ -177,11 +177,25 @@ void EVALVisitor::interprete(Program* programa){
 
 ///////////////////////////////////////////////////////////////////////
 
+int EVALVisitor::visit(StringExp* exp) {
+    
+    cout << exp->value;
+    return 0;
+}
+
 int EVALVisitor::visit(PrintStm* stm) {
-    // imprimir el primero
-    cout << stm->e->accept(this);
+    auto printOne = [&](Exp* ex) {
+        if (auto s = dynamic_cast<StringExp*>(ex)) {
+            cout << s->value;                
+        } else {
+            cout << ex->accept(this);        
+        }
+    };
+
+    printOne(stm->e);
     for (size_t i = 0; i < stm->evector.size(); ++i) {
-        cout << " " << stm->evector[i]->accept(this);
+        cout << " ";
+        printOne(stm->evector[i]);
     }
     cout << endl;
     return 0;
@@ -220,6 +234,11 @@ int PrintVisitor::visit(PrintStm* stm) {
     return 0;
 }
 
+int PrintVisitor::visit(StringExp* exp) {
+    
+    cout << "'" << exp->value << "'";
+    return 0;
+}
 
 int PrintVisitor::visit(AssignStm* stm) {
     cout << stm->id << " = ";

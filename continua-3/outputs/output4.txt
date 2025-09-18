@@ -1,10 +1,10 @@
 === STDOUT ===
 Parseo exitoso
 Codigo:
-a = min()
+a = min(37)
 print(a)
 
-Interprete:2147483647
+Interprete:3
 
 
 === STDERR ===

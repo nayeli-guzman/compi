@@ -178,9 +178,15 @@ void EVALVisitor::interprete(Program* programa){
 ///////////////////////////////////////////////////////////////////////
 
 int EVALVisitor::visit(PrintStm* stm) {
+    // imprimir el primero
     cout << stm->e->accept(this);
+    for (size_t i = 0; i < stm->evector.size(); ++i) {
+        cout << " " << stm->evector[i]->accept(this);
+    }
+    cout << endl;
     return 0;
 }
+
 
 int EVALVisitor::visit(AssignStm* stm) {
     memoria[stm->id] = stm->rhs->accept(this);
@@ -203,10 +209,17 @@ int EVALVisitor::visit(Program* p) {
 
 int PrintVisitor::visit(PrintStm* stm) {
     cout << "print(";
-    stm -> e ->accept(this);
+    // primero
+    stm->e->accept(this);
+    // resto de argumentos
+    for (size_t i = 0; i < stm->evector.size(); ++i) {
+        cout << ", ";
+        stm->evector[i]->accept(this);
+    }
     cout << ")" << endl;
     return 0;
 }
+
 
 int PrintVisitor::visit(AssignStm* stm) {
     cout << stm->id << " = ";

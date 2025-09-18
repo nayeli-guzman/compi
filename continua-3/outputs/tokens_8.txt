@@ -1,13 +1,25 @@
 Scanner
 
-TOKEN(NUM, "3")
-TOKEN(POW, "**")
-TOKEN(NUM, "2")
+TOKEN(ID, "r")
+TOKEN(ASSIGN, "=")
+TOKEN(RAND, "rand")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "5")
+TOKEN(COMA, ",")
+TOKEN(NUM, "15")
+TOKEN(RPAREN, ")")
 TOKEN(PLUS, "+")
+TOKEN(MIN, "min")
+TOKEN(LPAREN, "(")
 TOKEN(NUM, "4")
-TOKEN(POW, "**")
-TOKEN(NUM, "2")
-TOKEN(END)
+TOKEN(COMA, ",")
+TOKEN(NUM, "9")
+TOKEN(RPAREN, ")")
+TOKEN(SEMICOL, ";")
+TOKEN(PRINT, "print")
+TOKEN(LPAREN, "(")
+TOKEN(ERR, "â")
+Caracter invalido
 
-Scanner exitoso
+Scanner no exitoso
 

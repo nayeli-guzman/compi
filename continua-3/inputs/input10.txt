@@ -1,0 +1,1 @@
+val = min( rand(1,100), sqrt(81), 50 ); print(’Resultado final:’, val)

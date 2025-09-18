@@ -1,0 +1,1 @@
+ p = min(8, 6, 9, 2); print(’mínimo:’, p)

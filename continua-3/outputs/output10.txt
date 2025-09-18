@@ -1,7 +1,4 @@
 === STDOUT ===
-Parseo exitoso
-Codigo:
-2 ** 5 + sqrt(5 + 3) + 10
-Interprete:44
 
 === STDERR ===
+Error al parsear: Error lexico

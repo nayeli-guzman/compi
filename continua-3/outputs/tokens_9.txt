@@ -18,8 +18,15 @@ TOKEN(RPAREN, ")")
 TOKEN(SEMICOL, ";")
 TOKEN(PRINT, "print")
 TOKEN(LPAREN, "(")
-TOKEN(ERR, "â")
-Caracter invalido
+TOKEN(STRING, "x=")
+TOKEN(COMA, ",")
+TOKEN(ID, "x")
+TOKEN(COMA, ",")
+TOKEN(STRING, " y=")
+TOKEN(COMA, ",")
+TOKEN(ID, "y")
+TOKEN(RPAREN, ")")
+TOKEN(END)
 
-Scanner no exitoso
+Scanner exitoso
 

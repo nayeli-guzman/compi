@@ -197,17 +197,5 @@ Exp* Parser::parseF() {
 }
 
 Exp* Parser::printArg() {
-    Exp* e; 
-    if (match(Token::ID))
-    {
-        return new IdExp(previous->text);
-    } else {
-        e = parseCE();
-    }
-        return e;
-
-
-    //else {
-    //    throw runtime_error("Error sintáctico");
-    //}
+    return parseCE();  
 }

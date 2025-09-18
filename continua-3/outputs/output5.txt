@@ -4,7 +4,7 @@ Codigo:
 b = rand(1, 10)
 print('Numero aleatorio:', b)
 
-Interprete:Numero aleatorio: 2
+Interprete:Numero aleatorio: 4
 
 
 === STDERR ===

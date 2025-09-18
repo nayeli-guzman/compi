@@ -1,4 +1,11 @@
 === STDOUT ===
+Parseo exitoso
+Codigo:
+m = 10
+n = 4
+print('m-n:', m - n)
+
+Interprete:m-n: 6
+
 
 === STDERR ===
-Error al parsear: Error sintáctico

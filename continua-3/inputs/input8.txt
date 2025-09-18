@@ -1,1 +1,1 @@
-r = rand(5, 15) + min(4, 9); print(’valor r:’, r)
+r = rand(5, 15) + min(4, 9); print('valor r:', r)

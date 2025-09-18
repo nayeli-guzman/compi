@@ -1,4 +1,10 @@
 === STDOUT ===
+Parseo exitoso
+Codigo:
+r = rand(5, 15) + min(49)
+print('valor r:', r)
+
+Interprete:valor r: 15
+
 
 === STDERR ===
-Error al parsear: Error lexico

@@ -54,7 +54,8 @@ int main() {
     Parser parseLL1(tablapredictiva,startId);   // Crear parser
 
     // Entrada tokenizada (terminales según la gramática)
-    vector<string> entrada = {"1", "3" , "$"};  
+    // vector<string> entrada = {"1", "3" , "$"};  
+    vector<string> entrada = {"1", "+", "1", "*", "1", "$"};  
 
     cout << "\n=== Parseando entrada ===\n";
     bool valor = parseLL1.parse(entrada);  // Ejecuta el parseo LL(1)

@@ -69,13 +69,16 @@ bool Parser::parse(vector<string>& tokens) {
 
         // Caso: símbolo terminal en la cima
         if (top.type == TERMINAL) {
-            if (top.value == lookahead) {
+
+            
+            if (top.value == lookahead || table.tsVec[top.value] == "''") {
                 // Coincide: hacer "match"
                 cout << left << setw(widthPila) << pilaStr
                      << setw(widthEntrada) << entradaStr
                      << setw(widthRegla) << ("Match: " + table.tsVec[top.value]) << "\n";
                 st.pop();
                 ip++;
+                if (table.tsVec[top.value] == "''") ip--;
             } else {
                 // Error de coincidencia
                 cerr << "[Parser] Error: esperaba '"

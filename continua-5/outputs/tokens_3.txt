@@ -1,13 +1,14 @@
 Scanner
 
-TOKEN(ID, "n")
+TOKEN(ID, "z")
 TOKEN(ASSIGN, "=")
-TOKEN(NUM, "4")
+TOKEN(NUM, "3")
 TOKEN(SEMICOL, ";")
-TOKEN(IF, "if")
-TOKEN(LPAREN, "(")
-TOKEN(ID, "n")
-TOKEN(ERR, ">")
+TOKEN(ID, "switch")
+TOKEN(ID, "z")
+TOKEN(ID, "case")
+TOKEN(NUM, "1")
+TOKEN(ERR, ":")
 Caracter invalido
 
 Scanner no exitoso

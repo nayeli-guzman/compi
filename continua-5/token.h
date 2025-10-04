@@ -32,6 +32,16 @@ public:
         ENDIF,
         ENDWHILE,
         ELSE,
+        SWITCH,
+        ENDSWITCH,
+        CASE,
+        COL,
+        AND,
+        OR,
+        DEFAULT,
+        TRUE,
+        FALSE,
+        NOT, 
         END      // Fin de entrada
     };
 

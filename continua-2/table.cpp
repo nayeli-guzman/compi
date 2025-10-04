@@ -40,6 +40,12 @@ void Table::print() {
         }
         cout << "\n";
     }
+
+    // auto it = termMap.find("''");
+    // if (it != termMap.end()) {
+    //     termMap.erase(it);
+    //     tsVec.pop_back();
+    // }
 }
 
 /**
@@ -64,6 +70,9 @@ Table::Table(const Grammar& g, const First& first, const Follow& follow) {
         termMap[t] = id++;
         tsVec.push_back(t);
     }
+    termMap["''"] = id;
+    tsVec.push_back("''");
+
 
     // -------------------------
     // Construcción de la tabla LL(1)
@@ -81,10 +90,10 @@ Table::Table(const Grammar& g, const First& first, const Follow& follow) {
             alt = trim(alt);
             // Manejo de epsilon
             if (alt.empty() || alt == "''" || alt == "ε") {
-                for (auto term : follow.followSets.at(lhs)) {
+                for (auto term : follow.followSets.at(lhs)) { // identificar FOLLOW(A)
                     int lhsId = getNonTerminalId(lhs);
                     int termId = getTerminalId(term == "''" ? "$" : term);
-                    parserTable[{lhsId, termId}] = {}; // epsilon
+                    parserTable[{lhsId, termId}].push_back(Symbol(TERMINAL, termMap["''"])); // epsilon
                 }
                 continue;
             }

@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <list>
 #include <ostream>
+#include <vector>
 
 using namespace std;
 
@@ -110,6 +111,17 @@ public:
     int accept(Visitor* visitor);
 };
 
+class SwitchStm: public Stm {
+public:
+    Exp* variable;
+    vector<Exp*> casos;
+    vector<list<Stm*>> contenidodecasos;
+    list<Stm*> defaultcontenido;
+
+    SwitchStm(Exp*);
+    ~SwitchStm();
+    int accept(Visitor* visitor);
+};
 
 class Program{
 public:

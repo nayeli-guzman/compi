@@ -22,6 +22,7 @@ public:
         ERR,     // Error
         ID,      // ID
         LE,
+        GR,
         SEMICOL,    
         ASSIGN,
         PRINT,

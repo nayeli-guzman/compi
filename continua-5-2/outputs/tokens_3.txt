@@ -1,0 +1,33 @@
+Scanner
+
+TOKEN(ID, "z")
+TOKEN(ASSIGN, "=")
+TOKEN(NUM, "3")
+TOKEN(SEMICOL, ";")
+TOKEN(SWITCH, "switch")
+TOKEN(ID, "z")
+TOKEN(CASE, "case")
+TOKEN(NUM, "1")
+TOKEN(COLON, ":")
+TOKEN(PRINT, "print")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "111")
+TOKEN(RPAREN, ")")
+TOKEN(CASE, "case")
+TOKEN(NUM, "2")
+TOKEN(COLON, ":")
+TOKEN(PRINT, "print")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "222")
+TOKEN(RPAREN, ")")
+TOKEN(DEFAULT, "default")
+TOKEN(COLON, ":")
+TOKEN(PRINT, "print")
+TOKEN(LPAREN, "(")
+TOKEN(NUM, "0")
+TOKEN(RPAREN, ")")
+TOKEN(ENDSWITCH, "endswitch")
+TOKEN(END)
+
+Scanner exitoso
+

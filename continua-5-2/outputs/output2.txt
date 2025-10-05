@@ -1,0 +1,18 @@
+=== STDOUT ===
+switchjj
+2asas
+asas
+NOOO
+Parseo exitoso
+Codigo:
+y=2
+switch y
+case: 1
+print(10)
+case: 2
+print(20)
+endswitch
+
+Interprete:
+
+=== STDERR ===

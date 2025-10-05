@@ -1,0 +1,8 @@
+=== STDOUT ===
+switchjj
+2asas
+asas
+2112seg
+
+=== STDERR ===
+Error al parsear: Error sintáctico

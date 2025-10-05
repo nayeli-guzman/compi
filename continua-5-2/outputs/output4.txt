@@ -1,0 +1,5 @@
+=== STDOUT ===
+2112seg
+
+=== STDERR ===
+Error al parsear: Error sintáctico

@@ -1,8 +1,4 @@
 === STDOUT ===
-switchjj
-2asas
-asas
-NOOO
 Parseo exitoso
 Codigo:
 x=1
@@ -12,5 +8,6 @@ print(100)
 endswitch
 
 Interprete:
+100
 
 === STDERR ===

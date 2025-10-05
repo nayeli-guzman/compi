@@ -1,8 +1,4 @@
 === STDOUT ===
-switchjj
-2asas
-asas
-NOOO
 Parseo exitoso
 Codigo:
 z=3
@@ -11,10 +7,9 @@ case: 1
 print(111)
 case: 2
 print(222)
-case: 2
-print(0)
 endswitch
 
 Interprete:
+0
 
 === STDERR ===

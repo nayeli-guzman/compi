@@ -82,15 +82,6 @@ int PrintVisitor::visit(SqrtExp* exp) {
     return 0;
 }
 
-int PrintVisitor::visit(MonoExp* exp) {
-    if (exp->is_neg) cout << "not ";
-    exp->accept(this);
-    return 0;
-}
-
-
-
-
 void PrintVisitor::imprimir(Program* programa){
     if (programa)
     {
@@ -143,18 +134,10 @@ int EVALVisitor::visit(NumberExp* exp) {
 
 
 int EVALVisitor::visit(MonoExp* exp) {
-    return 0;
+
+    return ~exp->exp->accept(this);
 }
 
-
-int EVALVisitor::visit(SwitchStm* exp) {
-    return 0;
-}
-
-
-int EVALVisitor::visit(CaseStm* exp) {
-    return 0;
-}
 
 
 int EVALVisitor::visit(SqrtExp* exp) {
@@ -248,6 +231,43 @@ int EVALVisitor::visit(WhileStm* stm) {
     return 0;
 }
 
+int EVALVisitor::visit(SwitchStm* exp) {
+    int curr = exp->condition->accept(this);
+
+    bool c = false;
+
+    for(auto e: exp->slist) {
+        int _case = e->condition->accept(this);
+
+        if (_case == curr) {
+            for(auto ans:e->slist) {
+                ans->accept(this);
+            }
+            c = true;
+            break;
+        }
+    }
+
+    if (!c && !exp->deflist.empty()) {
+
+        for(auto e: exp->deflist) {
+            int _case = e->accept(this);
+        }
+    }
+
+
+
+    return 0;
+}
+
+
+int EVALVisitor::visit(CaseStm* exp) {
+    return 0;
+}
+
+
+
+
 
 int PrintVisitor::visit(IfStm* stm) {
     cout << "if " ;
@@ -266,6 +286,12 @@ int PrintVisitor::visit(IfStm* stm) {
     return 0;
 }
 
+int PrintVisitor::visit(MonoExp* exp) {
+    if (exp->is_neg) cout << "not ";
+    exp->exp->accept(this);
+    return 0;
+}
+
 int PrintVisitor::visit(WhileStm* stm) {
     cout << "while " ;
     stm->condicion->accept(this);
@@ -276,6 +302,7 @@ int PrintVisitor::visit(WhileStm* stm) {
     cout << "endwhile" << endl;
     return 0;
 }
+
 
 
 int PrintVisitor::visit(CaseStm* exp) {

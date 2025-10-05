@@ -136,6 +136,7 @@ class SwitchStm: public Stm {
 public:
     Exp* condition;
     list<CaseStm*> slist;
+    list<Stm*> deflist;
     SwitchStm(Exp*);
     ~SwitchStm();
     int accept(Visitor* visitor);

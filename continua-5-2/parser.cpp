@@ -20,6 +20,7 @@ Parser::Parser(Scanner* sc) : scanner(sc) {
 }
 
 bool Parser::match(Token::Type ttype) {
+
     if (check(ttype)) {
         advance();
         return true;
@@ -102,10 +103,8 @@ Stm* Parser::parseStm() {
         e =  parseAE(); 
         IfStm* claseif = new IfStm(e);  
         match(Token::THEN);
-        cout << 2112;
 
         claseif->slist1.push_back(parseStm());
-        cout << 2112;
         while(match(Token::SEMICOL)){
             claseif->slist1.push_back(parseStm());
         }
@@ -121,18 +120,15 @@ Stm* Parser::parseStm() {
         return claseif;
     }
     else if(match(Token::SWITCH)) {
-        cout << "switchjj" << endl;
 
         e = parseAE();
 
         SwitchStm* clase_switch = new SwitchStm(e);
-        cout << "2asas" << endl;
 
 
         match(Token::CASE);
         Exp* f = parseAE();
         match(Token::COLON);
-        cout << "asas" << endl;
 
         CaseStm* clase_case = new CaseStm(f);  
         clase_case->slist.push_back(parseStm());
@@ -158,18 +154,15 @@ Stm* Parser::parseStm() {
 
             clase_switch->slist.push_back(clase_case);
         }
-        cout << "NOOO" << endl;
 
         if (match(Token::DEFAULT)) {
             match(Token::COLON);
-            clase_case = new CaseStm(f);  
-            clase_case->slist.push_back(parseStm());
+            clase_switch->deflist.push_back(parseStm());
 
             while(match(Token::SEMICOL)){
-                clase_case->slist.push_back(parseStm());
+                clase_switch->deflist.push_back(parseStm());
             }
 
-            clase_switch->slist.push_back(clase_case);
         }
 
         match(Token::ENDSWITCH);
@@ -180,8 +173,6 @@ Stm* Parser::parseStm() {
     }
 
     else{
-    cout << "seg" << endl;
-
         throw runtime_error("Error sintáctico");
     }
     return a;
@@ -306,7 +297,7 @@ Exp* Parser::parseF() {
     else if (match(Token::SQRT))
     {   
         match(Token::LPAREN);
-        e = parseCE();
+        e = parseAE();
         match(Token::RPAREN);
         return new SqrtExp(e);
     }
@@ -322,7 +313,7 @@ Exp* Parser::parseF() {
     }
     else if (match(Token::NOT)) {
         match(Token::LPAREN);
-        e = parseCE();
+        e = parseAE();
         match(Token::RPAREN);
 
         return new MonoExp(e, true);

@@ -4,7 +4,7 @@ Codigo:
 r = rand(5, 15) + min(49)
 print('valor r:', r)
 
-Interprete:valor r: 15
+Interprete:valor r: 17
 
 
 === STDERR ===

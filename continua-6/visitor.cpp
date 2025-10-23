@@ -3,10 +3,10 @@
 #include <cmath>
 #include "ast.h"
 #include "visitor.h"
-
+#include "environment.h"
 
 using namespace std;
-unordered_map<std::string, int> memoria;
+Environment memoria;
 
 ///////////////////////////////////////////////////////////////////////////////////
 int BinaryExp::accept(Visitor* visitor) {
@@ -139,18 +139,20 @@ void EVALVisitor::interprete(Program* programa){
 
 int EVALVisitor::visit(VarDec* stm) {
     for (auto e:stm->variables) {
-        memoria[e] = 0;
+        memoria.add_var(e, stm->type);
     }
     return 0;
 }
 
 int EVALVisitor::visit(Body* stm) {
+    memoria.add_level();
     for (auto e:stm->vlist) {
         e->accept(this);
     }
     for (auto e:stm->slist) {
         e->accept(this);
     }
+    memoria.remove_level();
     return 0;
 }
 
@@ -200,47 +202,6 @@ int PrintVisitor::visit(IdExp* p) {
     return 0;
 }
 
-
-
-int EVALVisitor::visit(Program* p) {
-    p->body->accept(this);
-    return 0;
-}
-
-int EVALVisitor::visit(PrintStm* p) {
-    cout << p->e->accept(this) << endl; 
-    return 0;
-}
-
-int EVALVisitor::visit(AssignStm* p) {
-    memoria[p->id] = p->e->accept(this);
-    return 0;
-}
-
-int EVALVisitor::visit(IdExp* p) {
-    return memoria[p->value];
-}
-
-int EVALVisitor::visit(IfStm* stm) {
-    if (stm->condicion->accept(this)){
-        stm->body->accept(this);
-    }
-    else{
-        stm->bodyElse->accept(this);
-
-    }
-    return 0;
-}
-
-int EVALVisitor::visit(WhileStm* stm) {
-    while(stm->condicion->accept(this)){
-        for(auto i:stm->slist1){
-            i->accept(this);
-        }
-    }
-    return 0;
-}
-
 int PrintVisitor::visit(IfStm* stm) {
     cout << "if " ;
     stm->condicion->accept(this);
@@ -264,3 +225,45 @@ int PrintVisitor::visit(WhileStm* stm) {
     cout << "endwhile" << endl;
     return 0;
 }
+
+////////////////////////////////////////////////////////////////////////////////////
+
+int EVALVisitor::visit(Program* p) {
+    p->body->accept(this);
+    return 0;
+}
+
+int EVALVisitor::visit(PrintStm* p) {
+    cout << p->e->accept(this) << endl; 
+    return 0;
+}
+
+int EVALVisitor::visit(AssignStm* p) {
+    memoria.update(p->id, p->e->accept(this));
+    return 0;
+}
+
+int EVALVisitor::visit(IdExp* p) {
+    return memoria.lookup(p->value);
+}
+
+int EVALVisitor::visit(IfStm* stm) {
+    if (stm->condicion->accept(this)){
+        stm->body->accept(this);
+    }
+    else{
+        stm->bodyElse->accept(this);
+
+    }
+    return 0;
+}
+
+int EVALVisitor::visit(WhileStm* stm) {
+    while(stm->condicion->accept(this)){
+        for(auto i:stm->slist1){
+            i->accept(this);
+        }
+    }
+    return 0;
+}
+

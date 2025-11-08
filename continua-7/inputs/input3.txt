@@ -1,0 +1,7 @@
+a = 7;
+b = 3;
+if a > b then
+    if a > 10 then print(100) else print(50) endif
+else
+    print(0)
+endif

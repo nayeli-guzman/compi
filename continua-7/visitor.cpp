@@ -156,6 +156,28 @@ int GencodeVisitor::visit(BinaryExp* exp) {
         cout << "setl %al" << endl;
         cout << "movzbq %al, %rax" << endl; // deja en el rax 1 si es true , 0 caso contrario
         break;
+        case GR_OP:
+        exp->left->accept(this);
+        cout << "pushq %rax" << endl; 
+        exp->right->accept(this);
+        cout << "movq %rax, %rcx" << endl;
+        cout << "popq %rax" << endl;
+        cout << "cmpq %rax, %rcx" << endl;
+        cout << "movl $0, %eax" << endl;
+        cout << "setg %al" << endl;
+        cout << "movzbq %al, %rax" << endl; 
+        break;
+        case EQ_OP:
+        exp->left->accept(this);
+        cout << "pushq %rax" << endl; 
+        exp->right->accept(this);
+        cout << "movq %rax, %rcx" << endl;
+        cout << "popq %rax" << endl;
+        cout << "cmpq %rcx, %rax" << endl;
+        cout << "movl $0, %eax" << endl;
+        cout << "sete %al" << endl;
+        cout << "movzbq %al, %rax" << endl;
+        break;
 
 
         default:
@@ -168,7 +190,14 @@ int GencodeVisitor::visit(BinaryExp* exp) {
 }
 
 void GencodeVisitor::visit(WhileStm* stm) {
-
+    int label = labelcont++;
+    cout << "while_" << label << ":" << endl;
+    stm->condicion->accept(this);
+    cout << " cmpq $0, %rax" << endl;
+    cout << " je endwhile_" << label << endl;
+    for (auto s : stm->stlist) s->accept(this);
+    cout << " jmp while_" << label << endl;
+    cout << "endwhile_" << label << ":" << endl;
 }
 
 int GencodeVisitor::visit(NumberExp* exp) {
@@ -205,18 +234,19 @@ void GencodeVisitor::visit(PrintStm* stm) {
 }
 
 void GencodeVisitor::visit(IfStm* stm) {
+    int label = labelcont++;
     stm->condicion->accept(this);
     cout << "cmpq $0, %rax" << endl;
-    cout << "je else" << endl;
-    for(auto i:stm->slist1){
+    cout << "je else_" << label << endl;
+    for (auto i : stm->slist1){
         i->accept(this);
     }
-    cout << "jmp endif" << endl;
-    cout << "else:" << endl;
-    for(auto i:stm->slist2){
+    cout << "jmp endif_" << label << endl;
+    cout << "else_" << label << ":" << endl;
+    for (auto i : stm->slist2){
         i->accept(this);
     }
-    cout << "endif:" << endl;
+    cout << "endif_" << label << ":" << endl;
 }
 
 void GencodeVisitor::code(Program* program){

@@ -125,8 +125,15 @@ Stm* Parser::parseStm() {
 
 Exp* Parser::parseCE() {
     Exp* l = parseBE();
-    if (match(Token::LE)) {
-        BinaryOp op = LE_OP;
+    if (match(Token::LE) || match(Token::GR) || match(Token::EQ)) {
+        BinaryOp op;
+        if (previous->type == Token::LE){
+            op = LE_OP;
+        }else if (previous->type == Token::GR){
+            op = GR_OP;
+        }else{
+            op = EQ_OP;
+        }
         Exp* r = parseBE();
         l = new BinaryExp(l, r, op);
     }

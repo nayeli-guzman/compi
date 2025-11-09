@@ -21,7 +21,9 @@ public:
         NUM,     // Número
         ERR,     // Error
         ID,      // ID
-        LE,
+        LE,      // LESS THAN
+        GR,      // GREATER THAN
+        EQ,      // EQUAL
         SEMICOL,    
         ASSIGN,
         PRINT,

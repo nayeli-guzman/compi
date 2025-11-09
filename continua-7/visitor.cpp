@@ -70,10 +70,43 @@ void PrintVisitor::visit(PrintStm* stm) {
 }
 
 void PrintVisitor::visit(IfStm* stm) {
+    cout << "if ";
+    stm->condicion->accept(this);
+    cout << " then" << endl;
+
+    for (auto s : stm->slist1) {
+        cout << "    ";
+        s->accept(this);
+        cout << ";" << endl;
+    }
+
+    if (!stm->slist2.empty()) {
+        cout << "else" << endl;
+        for (auto s : stm->slist2) {
+            cout << "    ";
+            s->accept(this);
+            cout << ";" << endl;
+        }
+    }
+
+    cout << "endif";
 }
 
+
 void PrintVisitor::visit(WhileStm* stm) {
+    cout << "while ";
+    stm->condicion->accept(this);
+    cout << " do" << endl;
+
+    for (auto s : stm->stlist) {
+        cout << "    ";
+        s->accept(this);
+        cout << ";" << endl;
+    }
+
+    cout << "endwhile";
 }
+
 
 void PrintVisitor::imprimir(Program* program){
     for (Stm* s : program->slist) {
@@ -84,24 +117,29 @@ void PrintVisitor::imprimir(Program* program){
 
 ///////////////////////////////////////////////////////////////////////////////////
 int EVALVisitor::visit(BinaryExp* exp) {
-    int result;
     int v1 = exp->left->accept(this);
     int v2 = exp->right->accept(this);
-    switch(exp->op) {
-        case PLUS_OP: result = v1 + v2; break;
+    int result = 0;
+
+    switch (exp->op) {
+        case PLUS_OP:  result = v1 + v2; break;
         case MINUS_OP: result = v1 - v2; break;
-        case MUL_OP: result = v1 * v2; break;
+        case MUL_OP:   result = v1 * v2; break;
         case DIV_OP:
-            if(v2 != 0) result = v1 / v2;
+            if (v2 != 0) result = v1 / v2;
             else {
                 cout << "Error: división por cero" << endl;
                 result = 0;
             }
             break;
+        case LE_OP: result = (v1 < v2); break;
+        case GR_OP: result = (v1 > v2); break;
+        case EQ_OP: result = (v1 == v2); break;
         default:
             cout << "Operador desconocido" << endl;
-            result = 0;
+            break;
     }
+
     return result;
 }
 
@@ -110,6 +148,11 @@ int EVALVisitor::visit(NumberExp* exp) {
 }
 
 void EVALVisitor::visit(WhileStm* stm) {
+    while (stm->condicion->accept(this)) {
+        for (auto s : stm->stlist) {
+            s->accept(this);
+        }
+    }
 }
 
 
@@ -123,7 +166,16 @@ void EVALVisitor::visit(AssignStm* stm) {
 
 
 void EVALVisitor::visit(IfStm* stm) {
+    int cond = stm->condicion->accept(this);
+    if (cond) {
+        for (auto s : stm->slist1)
+            s->accept(this);
+    } else {
+        for (auto s : stm->slist2)
+            s->accept(this);
+    }
 }
+
 
 void EVALVisitor::visit(PrintStm* stm) {
     cout << stm->e->accept(this);

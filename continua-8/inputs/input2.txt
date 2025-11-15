@@ -1,0 +1,16 @@
+fun int main()
+    var int a,b;
+    a = 10;
+    b = 20;
+    if a < 30 then
+        var int b;
+        b = 1;
+        print(b)
+    else
+        var int b;
+        b = 2;
+        print(b)
+    endif;
+    print(b);
+    return(0)
+endfun

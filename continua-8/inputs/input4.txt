@@ -1,0 +1,9 @@
+fun void imprimir(int x)
+   print(x)
+endfun
+
+fun int main()
+    imprimir(3);
+    imprimir(4);
+    return(0)
+endfun

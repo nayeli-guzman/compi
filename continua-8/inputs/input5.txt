@@ -1,0 +1,13 @@
+fun void cuadrado(int x)
+    print(x*x)
+endfun
+
+fun int doble(int x)
+    return(x + x)
+endfun
+
+fun int main()
+    cuadrado(5);
+    print(doble(5));
+    return(0)
+endfun

@@ -1,0 +1,24 @@
+fun int main()
+    var int x;
+    x = 0;
+    if 12<3 then
+        var int a,b;
+        if 12<3 then
+                var int c,d;
+                c = 10;
+                d = 20;
+                print(c);
+                print(d)
+            else
+                var int e;
+                e = 30;
+                print(e)
+            endif;
+        print(x)
+    else
+        var int f,g,h,i,j,k;
+        j = 40;
+        print(j)
+    endif;
+    return(0)
+endfun

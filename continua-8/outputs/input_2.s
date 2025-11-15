@@ -17,7 +17,7 @@ main:
  popq %rax
  cmpq %rcx, %rax
  movl $0, %eax
- setle %al
+ setl %al
  movzbq %al, %rax
  cmpq $0, %rax
  je else_0
@@ -31,8 +31,8 @@ main:
  jmp endif_0
  else_0:
  movq $2, %rax
- movq %rax, -32(%rbp)
- movq -32(%rbp), %rax
+ movq %rax, -24(%rbp)
+ movq -24(%rbp), %rax
  movq %rax, %rsi
  leaq print_fmt(%rip), %rdi
  movl $0, %eax

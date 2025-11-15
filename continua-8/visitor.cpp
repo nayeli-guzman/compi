@@ -96,8 +96,8 @@ int GenCodeVisitor::visit(VarDec* stm) {
         if (!entornoFuncion) {
             memoriaGlobal[var] = true;
         } else {
-           memoria.add_var(var,offset);
-                offset -= 8;
+            memoria.add_var(var,offset);
+            offset -= 8;
         }
     }
         return 0;
@@ -178,9 +178,11 @@ int GenCodeVisitor::visit(IfStm* stm) {
     stm->condition->accept(this);
     out << " cmpq $0, %rax"<<endl;
     out << " je else_" << label << endl;
-   stm->then->accept(this);
+    int prev_offset = offset;
+    stm->then->accept(this);
     out << " jmp endif_" << label << endl;
     out << " else_" << label << ":"<< endl;
+    offset = prev_offset;
     if (stm->els) stm->els->accept(this);
     out << "endif_" << label << ":"<< endl;
     return 0;
@@ -288,7 +290,7 @@ int TypeCheckerVisitor::visit(WhileStm* stm) {
 }
 
 int TypeCheckerVisitor::visit(IfStm* stm) {
-    int a = locales;
+    int a = locales;    
     stm->then->accept(this);
     int b = locales;
     stm->els->accept(this);

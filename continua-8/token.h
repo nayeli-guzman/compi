@@ -30,10 +30,12 @@ public:
         PRINT,
         IF,
         WHILE,
+        FOR,
         DO,
         THEN,
         ENDIF,
         ENDWHILE,
+        ENDFOR,
         ELSE,
         END,      // Fin de entrada
         VAR,

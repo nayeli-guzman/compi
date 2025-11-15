@@ -40,6 +40,10 @@ int WhileStm::accept(Visitor* visitor) {
     return visitor->visit(this);
 }
 
+int ForStm::accept(Visitor* visitor) {
+    return visitor->visit(this);
+}
+
 int Body::accept(Visitor* visitor){
     return visitor->visit(this);
 }
@@ -200,6 +204,9 @@ int GenCodeVisitor::visit(WhileStm* stm) {
     return 0;
 }
 
+int GenCodeVisitor::visit(ForStm* stm) {
+    return 0;
+}
 
 int GenCodeVisitor::visit(ReturnStm* stm) {
     stm->e->accept(this);
@@ -286,6 +293,10 @@ int TypeCheckerVisitor::visit(VarDec* vd) {
 
 int TypeCheckerVisitor::visit(WhileStm* stm) {
     stm->b->accept(this);
+    return 0;
+}
+
+int TypeCheckerVisitor::visit(ForStm* stm) {
     return 0;
 }
 

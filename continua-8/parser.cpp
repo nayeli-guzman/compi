@@ -136,6 +136,10 @@ Stm* Parser::parseStm() {
     string variable;
     Body* tb = nullptr;
     Body* fb = nullptr;
+
+    Stm* it;
+    Stm* pat;
+
     if(match(Token::ID)){
         variable = previous->text;
         match(Token::ASSIGN);
@@ -183,6 +187,24 @@ else if (match(Token::IF)) {
             exit(1);
         }
         a = new WhileStm(e, tb);
+    }
+    else if (match(Token::FOR)) {
+        match(Token::LPAREN);
+
+        it = parseStm();
+        match(Token::COMA);
+        e = parseCE();
+        match(Token::COMA);
+        pat = parseStm();
+
+        match(Token::RPAREN);
+
+        tb = parseBody();
+        if (!match(Token::ENDFOR)) {
+            cout << "Error: se esperaba 'endfor' al final de la declaración." << endl;
+            exit(1);
+        }
+        a = new ForStm(it, e, pat, tb);
     }
     else{
         throw runtime_error("Error sintáctico");

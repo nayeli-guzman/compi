@@ -106,7 +106,16 @@ public:
     ~WhileStm(){};
 };
 
-
+class ForStm: public Stm {
+public:
+    Stm* iterator;
+    Exp* condition;
+    Stm* patron;
+    Body* b;
+    ForStm(Stm* iterator, Exp* condition, Stm* patron, Body* b);
+    int accept(Visitor* visitor);
+    ~ForStm(){};
+};
 
 class AssignStm: public Stm {
 public:

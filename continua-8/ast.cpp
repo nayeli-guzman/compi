@@ -52,6 +52,7 @@ IfStm::IfStm(Exp* c, Body* t, Body* e): condition(c), then(t), els(e) {}
 
 WhileStm::WhileStm(Exp* c, Body* t): condition(c), b(t) {}
 
+ForStm::ForStm(Stm* it, Exp* c, Stm* p, Body* t): iterator(it), condition(c), patron(p), b(t) {}
 
 PrintStm::PrintStm(Exp* expresion){
     e=expresion;

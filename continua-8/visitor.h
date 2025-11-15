@@ -13,6 +13,7 @@ class NumberExp;
 class Program;
 class PrintStm;
 class WhileStm;
+class ForStm;
 class IfStm;
 class AssignStm;
 class Body;
@@ -31,6 +32,7 @@ public:
     virtual int visit(Program* p) = 0;
     virtual int visit(PrintStm* stm) = 0;
     virtual int visit(WhileStm* stm) = 0;
+    virtual int visit(ForStm* stm) = 0;
     virtual int visit(IfStm* stm) = 0;
     virtual int visit(AssignStm* stm) = 0;
     virtual int visit(Body* body) = 0;
@@ -54,6 +56,7 @@ public:
     int visit(PrintStm* stm) override;
     int visit(AssignStm* stm) override;
     int visit(WhileStm* stm) override;
+    int visit(ForStm* stm) override;
     int visit(IfStm* stm) override;
     int visit(Body* body) override;
     int visit(VarDec* vd) override;
@@ -83,6 +86,7 @@ public:
     int visit(PrintStm* stm) override;
     int visit(AssignStm* stm) override;
     int visit(WhileStm* stm) override;
+    int visit(ForStm* stm) override;
     int visit(IfStm* stm) override;
     int visit(Body* body) override;
     int visit(VarDec* vd) override;

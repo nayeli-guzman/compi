@@ -141,10 +141,33 @@ Stm* Parser::parseStm() {
     Stm* pat;
 
     if(match(Token::ID)){
-        variable = previous->text;
-        match(Token::ASSIGN);
-        e = parseCE();
-        return new AssignStm(variable,e);
+        variable = previous->text; // nombre del la funcion a la que se llama
+        if (match(Token::LPAREN)) {
+
+            vector<Exp*> args;
+
+            if (!match(Token::RPAREN)) {
+
+                e = parseCE();
+                args.push_back(e);
+
+                while (match(Token::COMA))
+                {
+                    e = parseCE();
+                    args.push_back(e);
+                }
+                match(Token::RPAREN);
+            }
+            
+            return new FcallStm(variable, args);
+
+        } else {
+    
+            match(Token::ASSIGN);
+            e = parseCE();
+            return new AssignStm(variable,e);
+    
+        }
     }
     else if(match(Token::PRINT)){
         match(Token::LPAREN);
@@ -159,7 +182,7 @@ Stm* Parser::parseStm() {
         match(Token::RPAREN);
         return r;
     }
-else if (match(Token::IF)) {
+    else if (match(Token::IF)) {
         e = parseCE();
         if (!match(Token::THEN)) {
             cout << "Error: se esperaba 'then' después de la expresión." << endl;

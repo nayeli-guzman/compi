@@ -48,11 +48,23 @@ PrintStm::~PrintStm(){}
 
 AssignStm::~AssignStm(){}
 
+// FcallExp::~FcallExp(){}
+
+// FcallStm::~FcallStm(){}
+
 IfStm::IfStm(Exp* c, Body* t, Body* e): condition(c), then(t), els(e) {}
 
 WhileStm::WhileStm(Exp* c, Body* t): condition(c), b(t) {}
 
 ForStm::ForStm(Stm* it, Exp* c, Stm* p, Body* t): iterator(it), condition(c), patron(p), b(t) {}
+
+FcallExp::FcallExp(string nombre, vector<Exp*> c): nombre(nombre), argumentos(c) {}
+
+// FcallExp::FcallExp(){}
+
+FcallStm::FcallStm(string nombre, vector<Exp*> c): nombre(nombre), argumentos(c) {}
+
+// FcallStm::FcallStm(){}
 
 PrintStm::PrintStm(Exp* expresion){
     e=expresion;
@@ -62,6 +74,7 @@ AssignStm::AssignStm(string variable,Exp* expresion){
     id = variable;
     e = expresion;
 }
+
 
 
 

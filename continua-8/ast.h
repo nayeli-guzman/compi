@@ -9,6 +9,7 @@ using namespace std;
 
 class Visitor;
 class VarDec;
+class FcallExp;
 
 // Operadores binarios soportados
 enum BinaryOp { 
@@ -77,8 +78,9 @@ public:
 
 class Body{
 public:
-    list<Stm*> StmList;
+    list<Stm*> StmList; // dentro el fcall
     list<VarDec*> declarations;
+    list<FcallExp*> called_funcs;
     int accept(Visitor* visitor);
     Body();
     ~Body();
@@ -134,10 +136,15 @@ public:
     int accept(Visitor* visitor);
 };
 
-
-
-
-
+class FcallStm: public Stm {
+public:
+    string nombre;
+    vector<Exp*> argumentos;
+    int accept(Visitor* visitor);
+    FcallStm(string, vector<Exp*>);
+    FcallStm(){};
+    ~FcallStm(){};
+};
 
 class ReturnStm: public Stm {
 public:
@@ -152,6 +159,7 @@ public:
     string nombre;
     vector<Exp*> argumentos;
     int accept(Visitor* visitor);
+    FcallExp(string, vector<Exp*>);
     FcallExp(){};
     ~FcallExp(){};
 };

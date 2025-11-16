@@ -56,6 +56,10 @@ int FcallExp::accept(Visitor* visitor) {
     return visitor->visit(this);
 }
 
+int FcallStm::accept(Visitor* visitor) {
+    return visitor->visit(this);
+}
+
 int FunDec::accept(Visitor* visitor){
     return visitor->visit(this);
 }
@@ -258,6 +262,17 @@ int GenCodeVisitor::visit(FcallExp* exp) {
     return 0;
 }
 
+int GenCodeVisitor::visit(FcallStm* exp) {
+    vector<std::string> argRegs = {"%rdi", "%rsi", "%rdx", "%rcx", "%r8", "%r9"};
+    int size = exp->argumentos.size();
+    for (int i = 0; i < size; i++) {
+        exp->argumentos[i]->accept(this);
+        out << " mov %rax, " << argRegs[i] <<endl;
+    }
+    out << "call " << exp->nombre << endl;
+    return 0;
+}
+
 
 int TypeCheckerVisitor::type(Program* program){
     for(auto i:program->fdlist){
@@ -282,6 +297,7 @@ int TypeCheckerVisitor::visit(Body* body) {
     for(auto i:body->StmList){
         i->accept(this);
     }
+
     return 0;
 }
 
@@ -334,8 +350,20 @@ int TypeCheckerVisitor::visit(AssignStm* stm) {
 
 
 int TypeCheckerVisitor::visit(FcallExp* fcall) {
+
+    locales += fcall->argumentos.size();
+
     return 0;
 }
+
+int TypeCheckerVisitor::visit(FcallStm* fcall) {
+
+    locales += fcall->argumentos.size();
+    cout << "LOCALES" << locales << endl;
+
+    return 0;
+}
+
 int TypeCheckerVisitor::visit(ReturnStm* r) {
     return 0;
 }

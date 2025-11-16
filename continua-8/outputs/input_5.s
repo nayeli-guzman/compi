@@ -40,9 +40,10 @@ ret
 main:
  pushq %rbp
  movq %rsp, %rbp
- subq $0, %rsp
+ subq $8, %rsp
  movq $5, %rax
- movq %rax, 0(%rbp)
+ mov %rax, %rdi
+call cuadrado
  movq $5, %rax
  mov %rax, %rdi
 call doble

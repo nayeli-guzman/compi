@@ -214,10 +214,12 @@ Stm* Parser::parseStm() {
     else if (match(Token::FOR)) {
         match(Token::LPAREN);
 
+        match(Token::ID);
+
         it = parseStm();
-        match(Token::COMA);
+        match(Token::SEMICOL);
         e = parseCE();
-        match(Token::COMA);
+        match(Token::SEMICOL);
         pat = parseStm();
 
         match(Token::RPAREN);

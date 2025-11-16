@@ -10,6 +10,7 @@ using namespace std;
 class Visitor;
 class VarDec;
 class FcallExp;
+class AssignStm;
 
 // Operadores binarios soportados
 enum BinaryOp { 
@@ -110,9 +111,9 @@ public:
 
 class ForStm: public Stm {
 public:
-    Stm* iterator;
+    AssignStm* iterator; //ASSIGN
     Exp* condition;
-    Stm* patron;
+    AssignStm* patron;
     Body* b;
     ForStm(Stm* iterator, Exp* condition, Stm* patron, Body* b);
     int accept(Visitor* visitor);

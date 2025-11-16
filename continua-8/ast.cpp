@@ -56,7 +56,16 @@ IfStm::IfStm(Exp* c, Body* t, Body* e): condition(c), then(t), els(e) {}
 
 WhileStm::WhileStm(Exp* c, Body* t): condition(c), b(t) {}
 
-ForStm::ForStm(Stm* it, Exp* c, Stm* p, Body* t): iterator(it), condition(c), patron(p), b(t) {}
+ForStm::ForStm(Stm* it, Exp* c, Stm* p, Body* t)
+    : iterator(dynamic_cast<AssignStm*>(it)),
+      condition(c),
+      patron(dynamic_cast<AssignStm*>(p)),
+      b(t)
+{
+    if (!iterator || !patron) {
+        throw std::runtime_error("ForStm: iterator y patron deben ser AssignStm");
+    }
+}
 
 FcallExp::FcallExp(string nombre, vector<Exp*> c): nombre(nombre), argumentos(c) {}
 

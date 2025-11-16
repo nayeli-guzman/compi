@@ -209,6 +209,24 @@ int GenCodeVisitor::visit(WhileStm* stm) {
 }
 
 int GenCodeVisitor::visit(ForStm* stm) {
+    if (stm->iterator != nullptr) {
+        memoria.add_var(stm->iterator->id, offset);
+        offset -= 8;
+        stm->iterator->accept(this);
+        int label = labelcont++;
+
+        out << "for_" << label << ":" << endl;
+        stm->condition->accept(this);
+        out << " cmpq $0, %rax" << endl;
+        out << " je endfor_" << label << endl;
+
+        stm->b->accept(this);
+
+        stm->patron->accept(this);
+        out << "jmp for_" << label << endl;
+        out << "endfor_" << label << ":"<< endl;
+        
+    }
     return 0;
 }
 
@@ -313,6 +331,7 @@ int TypeCheckerVisitor::visit(WhileStm* stm) {
 }
 
 int TypeCheckerVisitor::visit(ForStm* stm) {
+    if (stm->iterator != nullptr) locales++;
     return 0;
 }
 

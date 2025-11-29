@@ -81,9 +81,6 @@ IfStm::IfStm(Exp* e){
     parteelse = false;
 }
 
-WhileStm::WhileStm(Exp* e){
-    condicion = e;
-}
 
 VarDec::VarDec(string type, list<string> s){
     this->type = type;

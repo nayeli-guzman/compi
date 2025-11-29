@@ -121,13 +121,12 @@ Stm* Parser::parseStm() {
         return new PrintStm(e);
     }
     else if(match(Token::WHILE)){
-        e =  parseCE(); 
-        WhileStm* clasewhile = new WhileStm(e);  
+        e = parseCE();                 // condición
+        WhileStm* clasewhile = new WhileStm(e);
         match(Token::DO);
-        clasewhile->slist1.push_back(parseStm());
-        while(match(Token::SEMICOL)){
-            clasewhile->slist1.push_back(parseStm());
-        }
+        
+        clasewhile->body = parseBody();
+        
         match(Token::ENDWHILE);
         return clasewhile;
     }

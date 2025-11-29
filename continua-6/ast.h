@@ -92,8 +92,10 @@ public:
 class WhileStm: public Stm {
 public:
     Exp* condicion;
-    list<Stm*> slist1;
-    WhileStm(Exp*);
+    list<Stm*> slist1;  
+    Body* body; 
+
+    WhileStm(Exp* c) : condicion(c), body(nullptr) {}
     ~WhileStm();
     int accept(Visitor* visitor);
 };

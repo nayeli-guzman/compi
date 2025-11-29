@@ -216,15 +216,18 @@ int PrintVisitor::visit(IfStm* stm) {
 }
 
 int PrintVisitor::visit(WhileStm* stm) {
-    cout << "while " ;
+    cout << "while ";
     stm->condicion->accept(this);
-    cout  << " do" << endl;
-    for (auto i:stm->slist1){
-        i->accept(this);
+    cout << " do" << endl;
+
+    if (stm->body) {
+        stm->body->accept(this);   
     }
+
     cout << "endwhile" << endl;
     return 0;
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -259,11 +262,10 @@ int EVALVisitor::visit(IfStm* stm) {
 }
 
 int EVALVisitor::visit(WhileStm* stm) {
-    while(stm->condicion->accept(this)){
-        for(auto i:stm->slist1){
-            i->accept(this);
+    while (stm->condicion->accept(this)) {
+        if (stm->body) {
+            stm->body->accept(this);   // ejecuta el Body con su propio scope
         }
     }
     return 0;
 }
-
